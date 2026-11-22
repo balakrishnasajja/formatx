@@ -1,0 +1,219 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Semantic tokens — dark first. Components only use these, never raw colors. */
+:root,
+[data-theme='dark'] {
+  /* True black: chrome (header, sidebar, status bar) is pure black-ish and the
+     editors sit one step above it, separated by hairline borders. */
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface-2: #050505;
+  --surface-3: #171717;
+  --elevated: #121212;
+  --border: #1f1f1f;
+  --border-strong: #2e2e2e;
+  --text: #ececec;
+  --text-muted: #a1a1a1;
+  --text-faint: #6b6b6b;
+  --accent: #5b9dff;
+  --accent-2: #a78bfa;
+  --accent-soft: rgb(91 157 255 / 0.14);
+  --accent-contrast: #ffffff;
+  --success: #3ecf8e;
+  --success-soft: rgb(62 207 142 / 0.12);
+  --warning: #f5b83d;
+  --warning-soft: rgb(245 184 61 / 0.12);
+  --error: #f47174;
+  --error-soft: rgb(244 113 116 / 0.12);
+  --info: #6cb6ff;
+  --info-soft: rgb(108 182 255 / 0.12);
+  --ring: rgb(91 157 255 / 0.5);
+  --shadow: 0 12px 32px -12px rgb(0 0 0 / 0.65), 0 0 0 1px rgb(255 255 255 / 0.04);
+  --grid: rgb(255 255 255 / 0.03);
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg: #eceef2;
+  --surface: #ffffff;
+  --surface-2: #f5f6f8;
+  --surface-3: #eaedf1;
+  --elevated: #ffffff;
+  --border: #e1e4ea;
+  --border-strong: #cbd0d9;
+  --text: #171a1f;
+  --text-muted: #555d6b;
+  --text-faint: #8a919e;
+  --accent: #2f6fdf;
+  --accent-2: #7c4dff;
+  --accent-soft: rgb(47 111 223 / 0.1);
+  --accent-contrast: #ffffff;
+  --success: #059669;
+  --success-soft: rgb(5 150 105 / 0.1);
+  --warning: #b45309;
+  --warning-soft: rgb(217 119 6 / 0.12);
+  --error: #dc2626;
+  --error-soft: rgb(220 38 38 / 0.08);
+  --info: #2563eb;
+  --info-soft: rgb(37 99 235 / 0.08);
+  --ring: rgb(47 111 223 / 0.35);
+  --shadow: 0 10px 30px -14px rgb(15 23 42 / 0.25), 0 0 0 1px rgb(15 23 42 / 0.04);
+  --grid: rgb(15 23 42 / 0.035);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-elevated: var(--elevated);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-error: var(--error);
+  --color-error-soft: var(--error-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --shadow-panel: var(--shadow);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+
+.fx-grid-bg {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.fx-brand-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+
+/* --- Monaco integration ------------------------------------------------ */
+.monaco-editor .fx-inline-error,
+.monaco-editor .fx-inline-warning,
+.monaco-editor .fx-inline-info {
+  font-style: italic;
+  font-size: 0.92em;
+  padding-left: 1.5em;
+  opacity: 0.9;
+}
+.monaco-editor .fx-inline-error {
+  color: var(--error) !important;
+}
+.monaco-editor .fx-inline-warning {
+  color: var(--warning) !important;
+}
+.monaco-editor .fx-inline-info {
+  color: var(--info) !important;
+}
+.monaco-editor .fx-line-error {
+  background: var(--error-soft);
+}
+.monaco-editor .fx-line-warning {
+  background: var(--warning-soft);
+}
+.monaco-editor .fx-line-flash {
+  background: var(--accent-soft);
+  transition: background 0.6s;
+}
+.monaco-editor .fx-gutter-error {
+  border-left: 3px solid var(--error);
+  margin-left: 3px;
+}
+.monaco-editor .fx-gutter-warning {
+  border-left: 3px solid var(--warning);
+  margin-left: 3px;
+}
+
+/* resizable panel handles */
+[data-separator] {
+  background: var(--border);
+  transition: background 0.15s;
+}
+[data-separator]:hover,
+[data-separator][data-separator-state='drag'],
+[data-separator]:focus-visible {
+  background: var(--accent);
+}
+
+@keyframes fx-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fx-fade-in {
+  animation: fx-fade-in 0.16s ease-out;
+}
+
+@keyframes fx-pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.fx-pulse {
+  animation: fx-pulse-dot 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

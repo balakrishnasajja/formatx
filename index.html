@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FormatX – detect, validate, beautify, minify and convert JSON, XML, YAML, TOML, CSV, HTML, CSS, JavaScript, SQL and more. 100% client-side." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>FormatX – Universal Data Formatter &amp; Validator</title>
+    <script>
+      // Apply the persisted theme before first paint to avoid a flash.
+      try {
+        var s = JSON.parse(localStorage.getItem('formatx:prefs') || '{}');
+        var t = (s && s.state && s.state.settings && s.state.settings.appTheme) || 'dark';
+        if (t === 'system') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
